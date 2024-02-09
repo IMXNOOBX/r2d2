@@ -22,5 +22,4 @@ module.exports = (client) => {
     client.on('ready', async () => {
         await client.application.commands.set(slashCmd) //Registering new slash comands
     })
-
 }

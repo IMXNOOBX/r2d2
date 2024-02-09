@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
+const mineflayer = require('mineflayer');
 const { Webhook } = require('dis-logs');
-
+const bot = require('./minecraft/index');
 const fs = require('fs');
-const auth = require('dotenv').config()
+require('dotenv').config()
+
 const client = new Discord.Client({
     intents: [
         Discord.GatewayIntentBits.Guilds,
@@ -17,10 +19,15 @@ const client = new Discord.Client({
     //]
 });
 
-client.db = require('quick.db'); // Doing this, we will enable quick.db globaly: client.db.get(`info`) 
+/**
+ * Register global variables under client namespace
+ */
+client.log = new Webhook(process.env.DISCORD_WEBHOOK);
+client.config = require('./conf/config');
+client.fs = fs;
+client.db = require('quick.db');  
+client.mc = mineflayer;
 client.ms = require('ms');
-client.config = require('./conf/config.json'); // Same with all of these
-client.log = new Webhook(client.config.utils.log_webhook);
 
 client.discord = Discord;
 client.commands = new Discord.Collection();
@@ -31,13 +38,17 @@ client.commands.buttons = new Discord.Collection();
 client.commands.menus = new Discord.Collection();
 client.commands.slash = new Discord.Collection();
 
+/**
+ * Register handlers and start commands
+ */
+const handlers = fs.readdirSync(`./handler`).filter(file => file.endsWith('.js'));
 
-// Creating Command Handler Handler
-var hands = ['hEvents', 'hSlash'];
-hands.forEach(handler => {
+handlers.forEach(handler => {
     require(`./handler/${handler}`)(client);
 });
 
-client.login(process.env.BOT_TOKEN).catch(err => {
-    client.log.error('[BOT] | Login Error. Discord Response: ' + err);
-});
+client
+    .login(process.env.BOT_TOKEN)
+    .catch(err => {
+        client.log.error('[BOT] | Login Error. Discord Response: ' + err);
+    });

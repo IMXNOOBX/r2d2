@@ -1,7 +1,13 @@
+const bot = require('../minecraft/index');
+
+
 module.exports.run = async (client) => {
   client.log.console(
     `[BOT] | Username: ${client.user.tag} | Guilds: ${client.guilds.cache.size} servers | Users: ${client.users.cache.size} total users`
   );
+
+  bot.initialize(client);
+  
   client.user.setStatus("dnd"); // online, idle, dnd, invisible
 
   const set_activity = async() => {
