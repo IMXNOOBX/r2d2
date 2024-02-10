@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const mineflayer = require('mineflayer');
+const { QuickDB } = require("quick.db");
+const axios = require('axios');
 const { Webhook } = require('dis-logs');
 const bot = require('./minecraft/index');
 const fs = require('fs');
@@ -8,9 +10,9 @@ require('dotenv').config()
 const client = new Discord.Client({
     intents: [
         Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.GuildMessages,
+        Discord.GatewayIntentBits.MessageContent,
         Discord.GatewayIntentBits.GuildMembers,
-        Discord.GatewayIntentBits.GuildMessages,
-        Discord.GatewayIntentBits.GuildMessages,
         Discord.GatewayIntentBits.GuildWebhooks,
         Discord.GatewayIntentBits.DirectMessages
     ],
@@ -24,8 +26,9 @@ const client = new Discord.Client({
  */
 client.log = new Webhook(process.env.DISCORD_WEBHOOK);
 client.config = require('./conf/config');
+client.axios = axios;
 client.fs = fs;
-client.db = require('quick.db');  
+client.db = new QuickDB();  
 client.mc = mineflayer;
 client.ms = require('ms');
 

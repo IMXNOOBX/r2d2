@@ -11,16 +11,21 @@ module.exports.run = async (client) => {
   client.user.setStatus("dnd"); // online, idle, dnd, invisible
 
   const set_activity = async() => {
-    const statuses = [
-      `${client.guilds.cache.size} Guilds`,
-      `${client.users.cache.size} Users`,
-      `${client.emojis.cache.size} Emojis`,
+    var statuses = [
+      `Bot is currently disconnected!`,
       `github.com/IMXNOOBX`,
     ];
 
-    const status = statuses[Math.floor(Math.random() * statuses.length)]; //Easy way to make random dynamic statuses
-    client.user.setActivity(status, { type: client.discord.ActivityType.Watching }); //LISTENING, WATCHING, PLAYING
+    if (client.bot) {
+      statuses.push(`my ${client.bot.health || 0}hp & ${client.bot.food || 0} food`)
+      statuses.push(`${Object.keys(client.bot.players || {}).length} players`)
+      statuses.push(`${process.env.MINECRAFT_SERVER} with a ping ${client.bot.player?.ping || 0}ms`)
+
+    }
+
+    const status = statuses[Math.floor(Math.random() * statuses.length)]; // Easy way to make random dynamic statuses
+    client.user.setActivity(status, { type: client.discord.ActivityType.Watching }); // LISTENING, WATCHING, PLAYING
   }
 
-  setInterval(set_activity, 60000); set_activity(); 
+  setInterval(set_activity, 30 * 1000); set_activity(); 
 };
