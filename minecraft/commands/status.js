@@ -5,9 +5,6 @@ module.exports = {
 	run: async (client, username, args) => {
 		const { bot } = client;
 
-		if (username != client.config.manager.minecraft) 
-			return bot.chat('You are not allowed to use this command!')
-
 		const players = Object.values(bot.players).filter(player => {
 			return player.username !== bot.username && player.entity;
 		});
