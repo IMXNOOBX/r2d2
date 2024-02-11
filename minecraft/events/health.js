@@ -19,9 +19,20 @@ module.exports.run = async (client) => {
 	else
 		bot.autoEat.enable()
 
-	// if (health <= client.config.bot.minimum_hp)
-	// 	bot.quit(`Low hp limit reached! ${health} < ${client.config.bot.minimum_hp}!`);	
+	if (client.bot.spawned) // else it wont have time to heal
+	if (health <= client.config.bot.minimum_hp && health > 0) // If 0 we alre already dead so no need to quit
+		bot.quit(`Low hp limit reached! ${health} < ${client.config.bot.minimum_hp}!`);	
 
+	if (health <= 0) {
+		const manager = client.config.manager.discord
+		if (!manager) return;
+		client.users.send(
+			manager, 
+			`<a:rojito:834745752939921428> | Bot died see server chat for the reason, hp was **${health}**/20`
+			).catch(e => client.log.error(`[MC] | Error sending message to manager: ${e}`));
+	}
+
+	if (client.bot.spawned) // else it wont have time to mineflayer-auto-eat
 	if (food <= client.config.bot.minimum_food)
 		bot.quit(`Low food limit reached! ${food} < ${client.config.bot.minimum_food}!`);
 

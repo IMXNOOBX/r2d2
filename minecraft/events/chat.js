@@ -22,6 +22,9 @@ module.exports.run = async (client, username, message) => {
 	if (!client.mc_commands || !client.config.bot.command)
 		return;
 
+	if (message.includes(process.env.MINECRAFT_USERNAME))
+		return client.bot.chat(`Hello, im FuFuBridge bot! How can I help you? My prefix is "${await client.db.get('mc.prefix') || client.config.bot.prefix}"`);
+
 	if (
 		!await message.startsWith(await client.db.get('mc.prefix')) &&
 		!message.startsWith(client.config.bot.prefix)

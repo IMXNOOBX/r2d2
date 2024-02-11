@@ -11,4 +11,6 @@ module.exports.run = async (client, error) => {
 		manager, 
 		`<a:rojito:834745752939921428> | Client connection ended: **${error}**`
 		).catch(e => client.log.error(`[MC] | Error sending message to manager: ${e}`));
+
+	client.bot = null;
 }    

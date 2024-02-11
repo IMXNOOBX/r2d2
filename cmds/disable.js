@@ -2,7 +2,7 @@ module.exports = {
     name: 'disable',
     description: 'Disable certain features of the bot.',
     options: [
-		{
+		    {
             name: "module",
             description: "Select module to disable from the bot",
             type: 3, // String
@@ -22,7 +22,7 @@ module.exports = {
             ],
             required: true
         },
-		{
+		    {
             name: "enable",
             description: "Enable or disable the module",
             type: 5, // Boolean

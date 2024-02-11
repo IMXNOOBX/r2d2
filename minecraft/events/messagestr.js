@@ -1,14 +1,18 @@
 module.exports.run = async (client, message, position, msg, sender, verified) => {
     const { bot } = client;
 
+	// console.log(`message: ${message}, position: ${position}, sender: ${sender}, verified: ${verified}`)
+
 	/**
 	 * Filter out the messages that are not from the player
 	 * Or join/leave messages, not really proud of this tbh
 	 */
+	// Maybe check if the message cointains a player name 
 	if (
 		sender ||
 		position == 'chat' ||
-		message.includes('left') || message.includes('joined')
+		message.includes('left') || message.includes('joined') ||
+		message.includes('No player was found') // When triying to attack a player
 	)
 		return;
 

@@ -2,7 +2,7 @@ module.exports = {
     name: 'players',
     description: 'Get the list of players on the server.',
     run: async (client, interaction) => {
-        const { bot } = client;
+        const bot = client.bot;
 
         if (!bot)
             return interaction.followUp({ content: 'Bot is not connected to the server!' });

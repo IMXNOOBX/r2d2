@@ -1,5 +1,5 @@
-const autoeat = require('mineflayer-auto-eat')
-
+const autoeat = require('mineflayer-auto-eat');
+const pathfinder = require('mineflayer-pathfinder')
 
 /**
  * Register Minecraft Events
@@ -81,7 +81,8 @@ const await_reconnect = async (client) => {
             if (!res.data.online) 
                 return client.log.console(`[MC] | Server is offline, awaiting reconnect...`);
 
-            const elsewhere = extra.some(e => e.name.includes(process.env.MINECRAFT_USERNAME));
+            const elsewhere = (res.data.players.now) ? res.data.players.sample.some(e => e.name.includes(process.env.MINECRAFT_USERNAME)) : false;
+
             if (elsewhere) 
                 return client.log.console(`[MC] | Bot owner is still online, awaiting reconnect...`);
 
@@ -90,7 +91,7 @@ const await_reconnect = async (client) => {
             if (!client.bot) 
                 return client.log.error(`[MC] | Bot failed to reconnect!`);
 
-            client.log.console(`[MC] | Bot reconnected to the server successfully!`);
+            client.log.success(`[MC] | Bot reconnected to the server successfully!`);
             clearInterval(reconnect_interval);
         }).catch((e) => client.log.error(`[MC] | Error while reconnecting: ${e}`));
 }
@@ -126,6 +127,15 @@ const initialize = async (client) => {
 	client.bot = bot;
 
 	bot.loadPlugin(autoeat.plugin);
+	bot.loadPlugin(pathfinder.pathfinder)
+
+	bot.on('spawn', () => {
+        bot.autoEat.options = {
+            priority: 'foodPoints',
+            startAt: client.config.bot.auto_eat,
+            bannedFood: []
+        };
+    });
 
 	register_events(client);
 	register_commands(client);

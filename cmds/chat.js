@@ -5,7 +5,7 @@ module.exports = {
 		{
             name: "channel",
             description: "Channel to bridge with minecraft chat.",
-            type: 7, // String
+            type: 7, // Channel
             required: true
         }
 	],
