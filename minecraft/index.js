@@ -57,7 +57,7 @@ const restart = async (client, force = false) => {
 	
 	client.recon_interval = setInterval(
 		await_reconnect, 
-		(client.config.bot.reconnect_interval || 60) * 60 * 1000, 
+		(client.config.bot.reconnect_interval || 60) * 1000, 
 		client
 	);
 

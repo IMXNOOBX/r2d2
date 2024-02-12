@@ -32,7 +32,7 @@ module.exports = {
 	},
 	discord: {
 		rate_limit: 1, // in seconds, Rate limit to send the messages to the minecraft server. the messages will be queued and sent after the rate limit
-		server_chat: '1206296107685126174', // The channel id where the bot will send the server chat
+		server_chat: '778318080887488532', // The channel id where the bot will send the server chat
 		server_events: false, // false and events will be sent to server chat
 	}
 };
