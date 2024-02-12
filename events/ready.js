@@ -20,7 +20,6 @@ module.exports.run = async (client) => {
       statuses.push(`my ${client.bot.health || 0}hp & ${client.bot.food || 0} food`)
       statuses.push(`${Object.keys(client.bot.players || {}).length} players`)
       statuses.push(`${process.env.MINECRAFT_SERVER} with a ping ${client.bot.player?.ping || 0}ms`)
-
     }
 
     const status = statuses[Math.floor(Math.random() * statuses.length)]; // Easy way to make random dynamic statuses

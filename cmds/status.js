@@ -13,7 +13,7 @@ module.exports = {
 
         const message = `[Discord]\n`+
             ` > Ping: ${client.ws.ping}ms\n` +
-            ` > Uptime: ${client.uptime / 1000}s\n` +
+            ` > Uptime: ${Math.floor(client.uptime / 1000)}s\n` +
             ` > Servers: ${client.guilds.cache.size}\n` +
             ` > Channels: ${client.channels.cache.size}\n` +
             ` > Users: ${client.users.cache.size}\n` +
@@ -21,8 +21,7 @@ module.exports = {
             ` > Ping: ${bot.player.ping}ms\n` +
             ` > Game mode: ${bot.game.gameMode}\n` +
             ` > Difficulty: ${bot.game.difficulty}\n` +
-            ` > Weather: ${bot.weather}\n` +
-            ` > Time: ${bot.time.day}d ${bot.time.time}t\n` +
+            ` > Time: ${bot.time.day}d ${bot.time.time / 1000}s\n` +
             
             ` > Players: ${Object.keys(bot.players).length}\n` +
             ` > Near players: ${players.length}\n` +

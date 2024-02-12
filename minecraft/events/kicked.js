@@ -1,5 +1,3 @@
-const mcbot = require('../index');
-
 module.exports.run = async (client, reason, loggedIn) => {
     const { bot } = client;
 
@@ -9,12 +7,8 @@ module.exports.run = async (client, reason, loggedIn) => {
 
     const elsewhere = extra.some(e => e.text.includes('You logged in from another location'));
 
-    if (elsewhere) {
+    if (elsewhere) 
         client.log.error(`[MC] | Bot owner logged in, awaiting reconnect...`);
-        reconnect_interval = setInterval(mcbot.await_reconnect, 60 * 1000, client);
-    }
-
-    client.bot = null;
 
     const manager = client.config.manager.discord
 

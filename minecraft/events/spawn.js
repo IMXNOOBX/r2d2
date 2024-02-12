@@ -36,7 +36,7 @@ module.exports.run = async (client) => {
 			if (!events_channel) return;
 			const channel = await client.channels.cache.get(events_channel);
 			if (channel) 
-				channel.send(`<a:loading_green:834745755918794802> Server is now been monitored!`);
+				channel.send(`# <a:loading_green:834745755918794802> Server is now been monitored!`);
 		}
 
 		{
@@ -169,11 +169,14 @@ const nearby_entities = async (client) => {
 	if (!bot)
 		return clearInterval(cache.nearby_entities_interval);
 
-	// const spawn_cords = client.bot.spawn_coordinates;
-	// if (spawn_cords.distanceTo(bot.entity.position) > 2) {
-	// 	bot.pathfinder.setMovements(new Movements(bot))
-	// 	bot.pathfinder.setGoal(new goals.GoalBlock(spawn_cords.x, spawn_cords.y, spawn_cords.z))
-	// }
+	const spawn_cords = client.bot.spawn_coordinates;
+	if (
+		spawn_cords.distanceTo(bot.entity.position) > 2 && 
+		client.config.bot.dont_move
+		) {
+		bot.pathfinder.setMovements(new Movements(bot))
+		bot.pathfinder.setGoal(new goals.GoalBlock(spawn_cords.x, spawn_cords.y, spawn_cords.z))
+	}
 
 	if (!bot.players) 
 		return;

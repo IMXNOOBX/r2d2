@@ -3,16 +3,44 @@ module.exports.run = async (client, message, position, msg, sender, verified) =>
 
 	// console.log(`message: ${message}, position: ${position}, sender: ${sender}, verified: ${verified}`)
 
+	if (sender)
+		return;
+
+	// Auto sleep? it should work in theory
+	if (message.includes('sleeping')) {
+		const bed = bot.findBlock({
+			matching: block => bot.isABed(block)
+		})
+
+		if (bed) 
+			await bot.sleep(bed)
+				.catch(e => {})
+
+		return;
+	}
+
+	// Nevers seen this before, it happens after the bot is some time connected
+	if (message.includes('expired profile public key')) {
+		const bridge = await client.db.get('bot.bridge') ?? client.config.discord.server_chat != null;
+		if (bridge) {
+			const chat_channel = await client.db.get('dsc.server_chat') ?? client.config.discord.server_chat;
+			const channel = await client.channels.cache.get(chat_channel);
+			if (channel) 
+				channel.send(`Bot's public key expired, reconnecting...`);
+		}
+
+		return bot.quit(message);
+	}
+
 	/**
 	 * Filter out the messages that are not from the player
 	 * Or join/leave messages, not really proud of this tbh
 	 */
-	// Maybe check if the message cointains a player name 
+	const players = Object.keys(bot.players);
+
 	if (
-		sender ||
-		position == 'chat' ||
-		message.includes('left') || message.includes('joined') ||
-		message.includes('No player was found') // When triying to attack a player
+		players.some(ply => message.includes(ply)) ||// Filter all server messages to the client
+		message.includes('game') // Filter joing/leave messages
 	)
 		return;
 

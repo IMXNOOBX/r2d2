@@ -20,19 +20,19 @@ module.exports = {
 			return bot.chat('I am full!')
 
 		bot.autoEat
-		.eat()
-		.then((successful) => {
-			if (!successful)
-				return bot.chat('I dont have anything to eat :(')
+			.eat()
+			.then((successful) => {
+				if (!successful)
+					return bot.chat('I dont have anything to eat :(')
 
-			if (bot.food == 20)
-				bot.chat('I am full!')
-			else
-				bot.chat('I am still hungry! ñam!')
-		})
-		.catch((error) => {
-			client.log.error(error)
-		})
+				if (bot.food == 20)
+					bot.chat('I am full!')
+				else
+					bot.chat('I am still hungry! ñam!')
+			})
+			.catch((error) => {
+				client.log.error(error)
+			})
 
 		bot.autoEat.options.startAt = client.config.bot.auto_eat
 	}
