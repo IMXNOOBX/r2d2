@@ -11,7 +11,7 @@ module.exports = {
 	],
     run: async (client, interaction) => {
         if (client.config.manager.discord !== interaction.user.id) 
-            return interaction.followUp({ content: 'You are not allowed to use this command!' });
+            return interaction.followUp({ content: '\`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- You are not allowed to use this command!\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`' });
 
         const channel = interaction.options.getChannel('channel');
 
@@ -24,6 +24,6 @@ module.exports = {
 
         await client.db.set('dsc.server_chat', channel);
 
-        interaction.followUp({ content: `Succesfully changed minecraft bridge to ${channel.name}` })
+        interaction.followUp({ content: `> Succesfully changed minecraft bridge to ${channel.name}` })
     }
 }

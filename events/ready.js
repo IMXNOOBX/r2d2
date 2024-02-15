@@ -16,11 +16,13 @@ module.exports.run = async (client) => {
       `github.com/IMXNOOBX`,
     ];
 
-    if (client.bot) {
-      statuses.push(`my ${client.bot.health || 0}hp & ${client.bot.food || 0} food`)
-      statuses.push(`${Object.keys(client.bot.players || {}).length} players`)
-      statuses.push(`${process.env.MINECRAFT_SERVER} with a ping ${client.bot.player?.ping || 0}ms`)
-    }
+    if (client.bot) 
+      statuses = [
+        `my ${client.bot.health || 0}hp & ${client.bot.food || 0} food`,
+        `${Object.keys(client.bot.players || {}).length} players`,
+        `${process.env.MINECRAFT_SERVER} with a ping ${client.bot.player?.ping || 0}ms`
+        `github.com/IMXNOOBX`,
+      ]
 
     const status = statuses[Math.floor(Math.random() * statuses.length)]; // Easy way to make random dynamic statuses
     client.user.setActivity(status, { type: client.discord.ActivityType.Watching }); // LISTENING, WATCHING, PLAYING

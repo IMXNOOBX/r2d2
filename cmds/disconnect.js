@@ -3,7 +3,7 @@ module.exports = {
     description: 'Disconnect the bot from the server thats been monitored.',
     run: async (client, interaction) => {
         if (client.config.manager.discord !== interaction.user.id) 
-        return interaction.followUp({ content: 'You are not allowed to use this command!' });
+        return interaction.followUp({ content: '\`\`\`diff\n- You are not allowed to use this command!\`\`\`' });
     
         const bot = client.bot;
 
@@ -12,6 +12,6 @@ module.exports = {
 
         bot.quit(`Manually disconnected from discord by ${interaction.user.username}!`);
 
-        interaction.followUp({ content: `Succesfully disconnected from server` })
+        interaction.followUp({ content: `> Succesfully disconnected from server` })
     }
 }

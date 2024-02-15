@@ -17,7 +17,7 @@ module.exports = {
 	],
     run: async (client, interaction) => {
         if (client.config.manager.discord !== interaction.user.id) 
-        return interaction.followUp({ content: 'You are not allowed to use this command!' });
+        return interaction.followUp({ content: '\`\`\`diff\n- You are not allowed to use this command!\`\`\`' });
     
         const bot = client.bot;
 
@@ -35,6 +35,6 @@ module.exports = {
         else
             mcbot.await_reconnect(client);
 
-        interaction.followUp({ content: `Succesfully ${force ? 're-initialized the bot' : 'prepared the bot for reconnection, awaiting checks and server status...'}` })
+        interaction.followUp({ content: `> Succesfully ${force ? 're-initialized the bot' : 'prepared the bot for reconnection, awaiting checks and server status...'}` })
     }
 }

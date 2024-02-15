@@ -27,7 +27,7 @@ module.exports = {
 	],
     run: async (client, interaction) => {
         if (client.config.manager.discord !== interaction.user.id) 
-            return interaction.followUp({ content: 'You are not allowed to use this command!' });
+            return interaction.followUp({ content: '\`\`\`diff\n- You are not allowed to use this command!\`\`\`' });
 
         const type = interaction.options.getString('type');
         const prefix = interaction.options.getString('prefix');
@@ -40,6 +40,6 @@ module.exports = {
 
         await client.db.set(`${type == 'dbot' ? 'dsc' : 'mc'}.prefix`, prefix);
 
-        interaction.followUp({ content: `Changed the prefix for ${type == 'dbot' ? 'discord' : 'minecraft'} bot to ${prefix}` })
+        interaction.followUp({ content: `> Changed the prefix for ${type == 'dbot' ? 'discord' : 'minecraft'} bot to ${prefix}` })
     }
 }

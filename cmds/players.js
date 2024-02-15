@@ -12,6 +12,6 @@ module.exports = {
         if (players.length === 0)
             return interaction.followUp({ content: 'No players online!' });
 
-        interaction.followUp({ content: `Players online: **${players.join('**, **')}**` });
+        interaction.followUp({ content: `> Players online: **${players.join('**, **')}**` });
     }
 }

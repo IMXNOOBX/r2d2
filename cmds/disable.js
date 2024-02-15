@@ -31,13 +31,13 @@ module.exports = {
 	],
     run: async (client, interaction) => {
         if (client.config.manager.discord !== interaction.user.id) 
-            return interaction.followUp({ content: 'You are not allowed to use this command!' });
+            return interaction.followUp({ content: '\`\`\`diff\n- \`\`\`diff\n- You are not allowed to use this command!\`\`\`\`\`\`' });
 
         const module = interaction.options.getString('module');
         const enable = interaction.options.getBoolean('enable');
 
         await client.db.set(`bot.${module}`, enable);
 
-        interaction.followUp({ content: `Succesfully ${enable ? 'enabled' : 'disabled'} ${module} module.` })
+        interaction.followUp({ content: `> Succesfully ${enable ? 'enabled' : 'disabled'} ${module} module.` })
     }
 }
