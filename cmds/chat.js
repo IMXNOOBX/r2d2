@@ -11,7 +11,7 @@ module.exports = {
 	],
     run: async (client, interaction) => {
         if (client.config.manager.discord !== interaction.user.id) 
-            return interaction.followUp({ content: '\`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- \`\`\`diff\n- You are not allowed to use this command!\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`' });
+            return interaction.followUp({ content: '```diff\n- You are not allowed to use this command!```' });
 
         const channel = interaction.options.getChannel('channel');
 

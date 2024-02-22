@@ -20,7 +20,7 @@ module.exports.run = async (client) => {
       statuses = [
         `my ${client.bot.health || 0}hp & ${client.bot.food || 0} food`,
         `${Object.keys(client.bot.players || {}).length} players`,
-        `${process.env.MINECRAFT_SERVER} with a ping ${client.bot.player?.ping || 0}ms`
+        `${process.env.MINECRAFT_SERVER} with a ping ${client.bot.player?.ping || 0}ms`,
         `github.com/IMXNOOBX`,
       ]
 

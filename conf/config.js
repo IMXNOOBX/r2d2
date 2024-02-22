@@ -5,7 +5,7 @@ module.exports = {
 	},
 	bot: {
 		dont_move: true, // if true the bot will go back to the position it spawned at
-		reconnect_interval: 1, // in seconds, the time that the bot will attempt to reconnect *The bot checks Throug mcapi.us if the owner is connected to the server first*
+		reconnect_interval: 60, // in seconds, the time that the bot will attempt to reconnect *The bot checks Throug mcapi.us if the owner is connected to the server first*
 
 		minimum_hp: 5, // The minimum health points the bot should have to exit
 		minimum_food: 5, // The minimum food points the bot should have to exit
@@ -32,7 +32,7 @@ module.exports = {
 	},
 	discord: {
 		rate_limit: 1, // in seconds, Rate limit to send the messages to the minecraft server. the messages will be queued and sent after the rate limit
-		server_chat: '778318080887488532', // The channel id where the bot will send the server chat
+		server_chat: '1206296107685126174', // The channel id where the bot will send the server chat
 		server_events: false, // false and events will be sent to server chat
 	}
 };
